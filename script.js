@@ -44,11 +44,10 @@ class Board {
         this.turn = [];
         this.river = [];
     }
-    deal(playerOneName, playerTwoName, playerThreeName, playerFourName) {
-        this.players.push(new Player(playerOneName));
-        this.players.push(new Player(playerTwoName));
-        this.players.push(new Player(playerThreeName));
-        this.players.push(new Player(playerFourName));
+    enterPlayer(name){
+      this.players.push(new Player(name));
+    }
+    deal() {
         let d = new Deck();
         d.createDeck();
         d.shuffleDeck();
@@ -64,7 +63,11 @@ class Board {
     }
 }
 let gameBoard = new Board();
-gameBoard.deal('Aaron', 'Ben' , 'Jim', 'Nathan');
+gameBoard.enterPlayer('Aaron');
+gameBoard.enterPlayer('Ben');
+gameBoard.enterPlayer('Jim');
+gameBoard.enterPlayer('Nathan');
+gameBoard.deal();
 console.log(gameBoard.players);
 console.log(gameBoard.flop);
 console.log(gameBoard.turn);
@@ -72,33 +75,48 @@ console.log(gameBoard.river);
 
 var i = 1
 
-function DealCards() {
-	var img = document.createElement('img');
-  img.id = 'card' + i
+function CreateCard(){
+  var img = document.createElement('img');
+  img.id = 'card' + i;
 	img.src ='H.png';
   var p = document.createElement('p');
-  p.value = 'H'
+  p.value = 'H';
 	document.getElementById('table').appendChild(img);
   document.getElementById('card' + i).appendChild(p);
-  console.log(i)
   target=document.getElementById('card' + i);
   target.style.width='10%';
   target.style.height='10%';
   i++
-  if (i == 4) {
-    target=document.getElementById('dealButton');
-    target.value='Deal Turn'
-  } else if (i == 5) {
-    target=document.getElementById('dealButton');
-    target.value='Deal River'
-  } else if (i == 6) {
-    target=document.getElementById('dealButton');
-    target.value='Next Round'
-    for (x = 1; x < i; x++) {
-      img.id = 'card' + x
-	    var element = document.getElementById(x);
-      element.table.removeChild(element);
 }
+
+function DealCards() {
+  console.log(i);
+  switch(i) {
+    case 1:
+      CreateCard();
+      CreateCard();
+	    CreateCard();
+      target=document.getElementById('dealButton');
+      target.value='Deal Turn';
+      break;
+    case 4:
+      CreateCard();
+      target=document.getElementById('dealButton');
+      target.value='Deal River';
+      break;
+    case 5:
+      CreateCard();
+      target=document.getElementById('dealButton');
+      target.value='Next Round';
+      break;
+    case 6:
+      target=document.getElementById('dealButton');
+      target.value='Deal Flop';
+      for (x = 1; x < i; x++) {
+	      var element = document.getElementById('card' + x);
+        document.getElementById('table').removeChild(element);
+      }
+      i = 1
+      break;
   }
 } 
-console.log(i)
