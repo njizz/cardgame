@@ -71,19 +71,26 @@ gameBoard.enterPlayer('Nathan');
 var i = 1
 
 function CreateCard(suit, rank){
+  var div = document.createElement('div');
   var img = document.createElement('img');
+  var spanR = document.createElement('span');
+  var spanS = document.createElement('span');
   img.id = 'card' + i;
   switch(suit){
     case '♣':
+      div.className ='card clubs'
       img.src ='C.png';
       break;
     case '♦':
+      div.className ='card diamonds'
       img.src ='D.png';
       break;
     case '♥':
+      div.className ='card hearts'
       img.src ='H.png';
       break;
     case '♠':
+      div.className ='card spades'
       img.src ='S.png';
       break;
   }

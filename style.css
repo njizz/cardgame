@@ -98,3 +98,36 @@ h1{
   bottom: 8px;
   right: 16px;
 }
+
+.playingCards .card {
+  width:auto;
+  height: 100px; 
+  text-align:center; 
+  padding:20px; 
+  top: 25%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%,-50%);
+}
+
+.playingCards .card .rank, .playingCards .card .suit {
+    display: block;
+    line-height: 1;
+    text-align: left;
+}
+
+.playingCards .card.clubs {
+    color: #000 !important;
+}
+
+.playingCards .card.diamonds {
+    color: rgb(136, 0, 0) !important;
+}
+
+.playingCards .card.hearts {
+    color: rgb(136, 0, 0) !important;
+}
+
+.playingCards .card.spades {
+    color: #000 !important;
+}
