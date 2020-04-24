@@ -78,8 +78,23 @@ h1{
   transform: translate(-50%,-50%);
 } 
 
-.table img { 
+.table img {
+  position: relative;
   max-width:500%; 
   height:50%;
   width:50%;
 } 
+
+/* Top left text */
+.top-left {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+}
+
+/* Bottom right text */
+.bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+}

@@ -11,7 +11,7 @@ class Deck {
     }      
     createDeck() {
         let suits = ['♣', '♦', '♥', '♠'];
-        let ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace'];
+        let ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
         let values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
         for (let i = 0; i < suits.length; i++) {
             for (let j = 0; j < ranks.length; j++) {
@@ -67,22 +67,38 @@ gameBoard.enterPlayer('Aaron');
 gameBoard.enterPlayer('Ben');
 gameBoard.enterPlayer('Jim');
 gameBoard.enterPlayer('Nathan');
-gameBoard.deal();
-console.log(gameBoard.players);
-console.log(gameBoard.flop);
-console.log(gameBoard.turn);
-console.log(gameBoard.river);
 
 var i = 1
 
-function CreateCard(){
+function CreateCard(suit, rank){
   var img = document.createElement('img');
   img.id = 'card' + i;
-	img.src ='H.png';
-  var p = document.createElement('p');
-  p.value = 'H';
+  switch(suit){
+    case '♣':
+      img.src ='C.png';
+      break;
+    case '♦':
+      img.src ='D.png';
+      break;
+    case '♥':
+      img.src ='H.png';
+      break;
+    case '♠':
+      img.src ='S.png';
+      break;
+  }
+  var text = document.createTextNode(rank);
+  var tl = document.createElement('div');
+  tl.id = 'card' + i + 'TextTL';
+  tl.className ='top-left'
+  var br = document.createElement('div');
+  br.id = 'card' + i + 'TextBR';
+  br.className ='bottom-right'
+  tl.appendChild(text);
+  br.appendChild(text);
 	document.getElementById('table').appendChild(img);
-  document.getElementById('card' + i).appendChild(p);
+  document.getElementById('card' + i).appendChild(tl);
+  document.getElementById('card' + i).appendChild(br);
   target=document.getElementById('card' + i);
   target.style.width='10%';
   target.style.height='10%';
@@ -90,22 +106,26 @@ function CreateCard(){
 }
 
 function DealCards() {
-  console.log(i);
   switch(i) {
     case 1:
-      CreateCard();
-      CreateCard();
-	    CreateCard();
+      gameBoard.deal();
+      console.log(gameBoard.players);
+      console.log(gameBoard.flop);
+      console.log(gameBoard.turn);
+      console.log(gameBoard.river);
+      CreateCard(gameBoard.flop[0].suit, gameBoard.flop[0].rank);
+      CreateCard(gameBoard.flop[1].suit, gameBoard.flop[1].rank);
+	    CreateCard(gameBoard.flop[2].suit, gameBoard.flop[2].rank);
       target=document.getElementById('dealButton');
       target.value='Deal Turn';
       break;
     case 4:
-      CreateCard();
+      CreateCard(gameBoard.turn[0].suit, gameBoard.turn[0].rank);
       target=document.getElementById('dealButton');
       target.value='Deal River';
       break;
     case 5:
-      CreateCard();
+      CreateCard(gameBoard.river[0].suit, gameBoard.river[0].rank);
       target=document.getElementById('dealButton');
       target.value='Next Round';
       break;
