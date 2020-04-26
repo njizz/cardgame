@@ -19,7 +19,7 @@ body, html{
   -o-background-size: cover;
 }
 
-.loginbox{
+.action{
   width: 200px;
   height: 10px;
   color: #fff;
@@ -37,19 +37,13 @@ h1{
   font-size: 22px;
 }
 
-.loginbox p{
-  margin: 0 ;
-  padding: 0;
-  font-weight: bold;
-}
-
-.loginbox input{
+.action input{
   width: 100%;
   height: 100%;
   margin-bottom: 20px;
 }
 
-.loginbox input[type="submit"]
+.action input[type="submit"]
 {
   border: none;
   outline: none;
@@ -60,7 +54,7 @@ h1{
   border-radius: 20px;
 }
 
-.loginbox input[type="submit"]:hover
+.action input[type="submit"]:hover
 {
   cursor: pointer;
   background: #db4646;
@@ -84,50 +78,3 @@ h1{
   height:50%;
   width:50%;
 } 
-
-/* Top left text */
-.top-left {
-  position: absolute;
-  top: 8px;
-  left: 16px;
-}
-
-/* Bottom right text */
-.bottom-right {
-  position: absolute;
-  bottom: 8px;
-  right: 16px;
-}
-
-.playingCards .card {
-  width:auto;
-  height: 100px; 
-  text-align:center; 
-  padding:20px; 
-  top: 25%;
-  left: 50%;
-  position: absolute;
-  transform: translate(-50%,-50%);
-}
-
-.playingCards .card .rank, .playingCards .card .suit {
-    display: block;
-    line-height: 1;
-    text-align: left;
-}
-
-.playingCards .card.clubs {
-    color: #000 !important;
-}
-
-.playingCards .card.diamonds {
-    color: rgb(136, 0, 0) !important;
-}
-
-.playingCards .card.hearts {
-    color: rgb(136, 0, 0) !important;
-}
-
-.playingCards .card.spades {
-    color: #000 !important;
-}

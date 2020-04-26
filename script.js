@@ -10,7 +10,7 @@ class Deck {
         this.cards = [];    
     }      
     createDeck() {
-        let suits = ['♣', '♦', '♥', '♠'];
+        let suits = ['C', 'D', 'H', 'S'];
         let ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
         let values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
         for (let i = 0; i < suits.length; i++) {
@@ -76,39 +76,11 @@ function CreateCard(suit, rank){
   var spanR = document.createElement('span');
   var spanS = document.createElement('span');
   img.id = 'card' + i;
-  switch(suit){
-    case '♣':
-      div.className ='card clubs'
-      img.src ='C.png';
-      break;
-    case '♦':
-      div.className ='card diamonds'
-      img.src ='D.png';
-      break;
-    case '♥':
-      div.className ='card hearts'
-      img.src ='H.png';
-      break;
-    case '♠':
-      div.className ='card spades'
-      img.src ='S.png';
-      break;
-  }
-  var text = document.createTextNode(rank);
-  var tl = document.createElement('div');
-  tl.id = 'card' + i + 'TextTL';
-  tl.className ='top-left'
-  var br = document.createElement('div');
-  br.id = 'card' + i + 'TextBR';
-  br.className ='bottom-right'
-  tl.appendChild(text);
-  br.appendChild(text);
+  img.src = suit + rank + '.png';
 	document.getElementById('table').appendChild(img);
-  document.getElementById('card' + i).appendChild(tl);
-  document.getElementById('card' + i).appendChild(br);
   target=document.getElementById('card' + i);
-  target.style.width='10%';
-  target.style.height='10%';
+  target.style.width='20%';
+  target.style.height='20%';
   i++
 }
 
