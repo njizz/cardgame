@@ -71,10 +71,8 @@ gameBoard.enterPlayer('Nathan');
 var i = 1
 
 function CreateCard(suit, rank){
-  var div = document.createElement('div');
   var img = document.createElement('img');
-  var spanR = document.createElement('span');
-  var spanS = document.createElement('span');
+  img.className = 'card'
   img.id = 'card' + i;
   img.src = suit + rank + '.png';
 	document.getElementById('table').appendChild(img);
