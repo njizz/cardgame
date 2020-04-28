@@ -3,7 +3,7 @@
   <head>
 	  <meta charset="utf-8">
 	  <meta name="viewport" content="width=device-width">
-	  <title>Card Game</title>
+	  <title>Secret Poker Club</title>
 	  <link href="style.css" rel="stylesheet" type="text/css" />
     <link href='https://fonts.googleapis.com/css?family=Trade Winds' rel='stylesheet'>
   </head>
@@ -12,32 +12,24 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="script.js"></script>
     <div id="sidebar">
-      <div class="playerbox">
+      <div class="playerbox" id="Aaron">
         <p>Aaron</p>
-        <img class="card" src="D10.png" style="width: 45%; height: 45%;">
-        <img class="card" src="S10.png" style="width: 45%; height: 45%;">
       </div>
-      <div class="playerbox">
+      <div class="playerbox" id="Ben">
         <p>Ben</p>
-        <img class="card" src="CJ.png" style="width: 45%; height: 45%;">
-        <img class="card" src="CK.png" style="width: 45%; height: 45%;">
       </div>
-      <div class="playerbox">
+      <div class="playerbox" id="Jim">
         <p>Jim</p>
-        <img class="card" src="SQ.png" style="width: 45%; height: 45%;">
-        <img class="card" src="D2.png" style="width: 45%; height: 45%;">
       </div>
-      <div class="playerbox">
+      <div class="playerbox" id="Nathan">
         <p>Nathan</p>
-        <img class="card" src="HA.png" style="width: 45%; height: 45%;">
-        <img class="card" src="SA.png" style="width: 45%; height: 45%;">
       </div>
     </div>
     <div id="main">
       <div id="table"></div>
-      <div class="bets"></div>
+      <div id="bets"></div>
       <div class="action">
-        <input id="dealButton" type="submit" value="Deal Flop" onclick = "DealCards()">
+        <input id="dealButton" type="submit" value="Start Poker" onclick = "DealCards()">
       </div>
     </div>
   </body>

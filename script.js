@@ -62,58 +62,102 @@ class Board {
         this.river = d.cards.slice(x+4, x+5);
     }
 }
-let gameBoard = new Board();
-gameBoard.enterPlayer('Aaron');
-gameBoard.enterPlayer('Ben');
-gameBoard.enterPlayer('Jim');
-gameBoard.enterPlayer('Nathan');
 
-var i = 1
+var tc = 0
 
-function CreateCard(suit, rank){
+function CreateTableCard(suit, rank,name){
   var img = document.createElement('img');
   img.className = 'card'
-  img.id = 'card' + i;
+  img.id = 'card' + tc;
   img.src = suit + rank + '.png';
 	document.getElementById('table').appendChild(img);
-  target=document.getElementById('card' + i);
+  target=document.getElementById('card' + tc);
   target.style.width='20%';
   target.style.height='20%';
-  i++
+  tc++
+}
+
+function CreatePlayerCard(suit, rank, name, c){
+  var img = document.createElement('img');
+  img.className = 'playercard'
+  img.id = name + 'card' + c;
+  img.src = suit + rank + '.png';
+  test = document.getElementById(name)
+  console.log(test)
+	document.getElementById(name).appendChild(img);
+  target=document.getElementById(name + 'card' + c);
+  target.style.width='45%';
+  target.style.height='45%';
 }
 
 function DealCards() {
-  switch(i) {
+  switch(tc) {
+    case 0:
+      gameBoard.enterPlayer('Aaron');
+      gameBoard.enterPlayer('Ben');
+      gameBoard.enterPlayer('Jim');
+      gameBoard.enterPlayer('Nathan');
+      gameBoard.deal();
+      console.log(gameBoard.players);
+      console.log(gameBoard.flop);
+      console.log(gameBoard.turn);
+      console.log(gameBoard.river);
+      for(p = 0; p < gameBoard.players.length; p++){
+        n = gameBoard.players[p].playerName
+        for(c = 0; c < 2; c++){
+          s = gameBoard.players[p].playerCards[c].suit
+          r = gameBoard.players[p].playerCards[c].rank
+          CreatePlayerCard(s, r, n, c + 1)
+        }
+      }
+      tc = 1
+      target=document.getElementById('dealButton');
+      target.value='Deal Flop';
+      break;
     case 1:
       gameBoard.deal();
       console.log(gameBoard.players);
       console.log(gameBoard.flop);
       console.log(gameBoard.turn);
       console.log(gameBoard.river);
-      CreateCard(gameBoard.flop[0].suit, gameBoard.flop[0].rank);
-      CreateCard(gameBoard.flop[1].suit, gameBoard.flop[1].rank);
-	    CreateCard(gameBoard.flop[2].suit, gameBoard.flop[2].rank);
+      CreateTableCard(gameBoard.flop[0].suit, gameBoard.flop[0].rank);
+      CreateTableCard(gameBoard.flop[1].suit, gameBoard.flop[1].rank);
+	    CreateTableCard(gameBoard.flop[2].suit, gameBoard.flop[2].rank);
       target=document.getElementById('dealButton');
       target.value='Deal Turn';
       break;
     case 4:
-      CreateCard(gameBoard.turn[0].suit, gameBoard.turn[0].rank);
+      CreateTableCard(gameBoard.turn[0].suit, gameBoard.turn[0].rank);
       target=document.getElementById('dealButton');
       target.value='Deal River';
       break;
     case 5:
-      CreateCard(gameBoard.river[0].suit, gameBoard.river[0].rank);
+      CreateTableCard(gameBoard.river[0].suit, gameBoard.river[0].rank);
       target=document.getElementById('dealButton');
       target.value='Next Round';
       break;
     case 6:
       target=document.getElementById('dealButton');
       target.value='Deal Flop';
-      for (x = 1; x < i; x++) {
+      for (x = 1; x < tc; x++) {
 	      var element = document.getElementById('card' + x);
         document.getElementById('table').removeChild(element);
       }
-      i = 1
+      for(p = 0; p < gameBoard.players.length; p++){
+        n = gameBoard.players[p].playerName
+        for(c = 0; c < 2; c++){
+          y = c + 1
+          var element = document.getElementById(n + 'card' + y);
+          document.getElementById(n).removeChild(element)
+          s = gameBoard.players[p].playerCards[c].suit
+          r = gameBoard.players[p].playerCards[c].rank
+          CreatePlayerCard(s, r, n, y)
+        }
+      }
+      tc = 1
+      gameBoard.deal();
       break;
   }
 } 
+
+let gameBoard = new Board();
