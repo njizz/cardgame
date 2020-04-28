@@ -34,6 +34,7 @@ class Player {
     constructor(name) {
         this.playerName = name;
         this.playerCards = [];
+        this.reveal = false
     }
 }
 class Board {
@@ -82,8 +83,17 @@ function CreatePlayerCard(suit, rank, name, c){
   img.className = 'playercard'
   img.id = name + 'card' + c;
   img.src = suit + rank + '.png';
-  test = document.getElementById(name)
-  console.log(test)
+	document.getElementById(name).appendChild(img);
+  target=document.getElementById(name + 'card' + c);
+  target.style.width='45%';
+  target.style.height='45%';
+}
+
+function CreateCardBack(name, c){
+  var img = document.createElement('img');
+  img.className = 'playercard'
+  img.id = name + 'card' + c;
+  img.src = 'back.png';
 	document.getElementById(name).appendChild(img);
   target=document.getElementById(name + 'card' + c);
   target.style.width='45%';
@@ -107,7 +117,11 @@ function DealCards() {
         for(c = 0; c < 2; c++){
           s = gameBoard.players[p].playerCards[c].suit
           r = gameBoard.players[p].playerCards[c].rank
-          CreatePlayerCard(s, r, n, c + 1)
+          if (gameBoard.players[p].reveal == true){
+            CreatePlayerCard(s, r, n, c + 1)
+          } else {
+            CreateCardBack(n, c + 1)
+          }
         }
       }
       tc = 1
