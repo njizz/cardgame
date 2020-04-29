@@ -68,7 +68,7 @@ var tc = 0
 
 function CreateTableCard(suit, rank,name){
   var img = document.createElement('img');
-  img.className = 'card'
+  img.className = 'card';
   img.id = 'card' + tc;
   img.src = suit + rank + '.png';
 	document.getElementById('table').appendChild(img);
@@ -80,7 +80,7 @@ function CreateTableCard(suit, rank,name){
 
 function CreatePlayerCard(suit, rank, name, c){
   var img = document.createElement('img');
-  img.className = 'playercard'
+  img.className = 'playercard';
   img.id = name + 'card' + c;
   img.src = suit + rank + '.png';
 	document.getElementById(name).appendChild(img);
@@ -91,7 +91,7 @@ function CreatePlayerCard(suit, rank, name, c){
 
 function CreateCardBack(name, c){
   var img = document.createElement('img');
-  img.className = 'playercard'
+  img.className = 'playercard';
   img.id = name + 'card' + c;
   img.src = 'back.png';
 	document.getElementById(name).appendChild(img);
@@ -103,24 +103,20 @@ function CreateCardBack(name, c){
 function DealCards() {
   switch(tc) {
     case 0:
-      gameBoard.enterPlayer('Aaron');
-      gameBoard.enterPlayer('Ben');
-      gameBoard.enterPlayer('Jim');
-      gameBoard.enterPlayer('Nathan');
       gameBoard.deal();
       console.log(gameBoard.players);
       console.log(gameBoard.flop);
       console.log(gameBoard.turn);
       console.log(gameBoard.river);
       for(p = 0; p < gameBoard.players.length; p++){
-        n = gameBoard.players[p].playerName
+        n = gameBoard.players[p].playerName;
         for(c = 0; c < 2; c++){
-          s = gameBoard.players[p].playerCards[c].suit
-          r = gameBoard.players[p].playerCards[c].rank
-          if (gameBoard.players[p].reveal == true){
-            CreatePlayerCard(s, r, n, c + 1)
+          s = gameBoard.players[p].playerCards[c].suit;
+          r = gameBoard.players[p].playerCards[c].rank;
+          if (gameBoard.players[p].reveal == false){
+            CreatePlayerCard(s, r, n, c + 1);
           } else {
-            CreateCardBack(n, c + 1)
+            CreateCardBack(n, c + 1);
           }
         }
       }
@@ -129,11 +125,6 @@ function DealCards() {
       target.value='Deal Flop';
       break;
     case 1:
-      gameBoard.deal();
-      console.log(gameBoard.players);
-      console.log(gameBoard.flop);
-      console.log(gameBoard.turn);
-      console.log(gameBoard.river);
       CreateTableCard(gameBoard.flop[0].suit, gameBoard.flop[0].rank);
       CreateTableCard(gameBoard.flop[1].suit, gameBoard.flop[1].rank);
 	    CreateTableCard(gameBoard.flop[2].suit, gameBoard.flop[2].rank);
@@ -153,25 +144,59 @@ function DealCards() {
     case 6:
       target=document.getElementById('dealButton');
       target.value='Deal Flop';
+      gameBoard.deal();
+      console.log(gameBoard.players);
+      console.log(gameBoard.flop);
+      console.log(gameBoard.turn);
+      console.log(gameBoard.river);
       for (x = 1; x < tc; x++) {
 	      var element = document.getElementById('card' + x);
         document.getElementById('table').removeChild(element);
       }
       for(p = 0; p < gameBoard.players.length; p++){
-        n = gameBoard.players[p].playerName
+        n = gameBoard.players[p].playerName;
         for(c = 0; c < 2; c++){
-          y = c + 1
+          y = c + 1;
           var element = document.getElementById(n + 'card' + y);
-          document.getElementById(n).removeChild(element)
-          s = gameBoard.players[p].playerCards[c].suit
-          r = gameBoard.players[p].playerCards[c].rank
-          CreatePlayerCard(s, r, n, y)
+          document.getElementById(n).removeChild(element);
+          s = gameBoard.players[p].playerCards[c].suit;
+          r = gameBoard.players[p].playerCards[c].rank;
+          if (gameBoard.players[p].reveal == false){
+            CreatePlayerCard(s, r, n, c + 1);
+          } else {
+            CreateCardBack(n, c + 1);
+          }
         }
       }
       tc = 1
-      gameBoard.deal();
       break;
   }
 } 
 
 let gameBoard = new Board();
+gameBoard.enterPlayer('Aaron');
+gameBoard.enterPlayer('Ben');
+gameBoard.enterPlayer('Jim');
+gameBoard.enterPlayer('Nathan');
+
+/****************************
+ * Declare DB varibles
+ ****************************/
+var db = openDatabase("PokerDB","1.0","", 2*1024*1024)
+
+/******************************
+  db.transaction(function(tx) {
+    tx.executeSql('SELECT * FROM players', [], function(tx, results) {
+      var len=results.rows.length;
+      var i;
+      for(i=0; i<len; i++) {
+        //Set values coming from the database
+        console.log(results.rows.item(i).card2);
+        var p = document.createElement('p');
+        p.innerText = results.rows.item(i).card2
+        document.getElementById('table').appendChild(p);
+      }
+    });
+  }); 
+*/
+ 
